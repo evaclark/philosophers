@@ -6,37 +6,46 @@
 /*   By: eclark <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 17:10:44 by eclark            #+#    #+#             */
-/*   Updated: 2022/10/28 15:35:29 by eclark           ###   ########.fr       */
+/*   Updated: 2022/12/13 14:21:14 by eclark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void *message()
+void	*message(void *philo)
 {
-	sleep(1);
-	printf("wowowowoowow\n");
-	return (NULL);
+	struct timeval	current;
+
+	usleep(1000);
+	gettimeofday(&current, NULL);
+	printf("Philo %ld\n", (struct philo*)philo->time));
+	return (0);
 }
 
-int main(int argc, char **argv)
+void	init_philo(int argc, char **argv, t_philo *philo)
 {
-	int			n;
+	struct timeval	start;
+	int	n;
 
 	n = ft_atoi(argv[1]);
-	printf("hi\n");
+	philo->time = gettimeofday(&start, NULL);
 	if (argc == 2)
 	{
 		while (n > 0)
 		{
 			pthread_t philosopher[n];
 
-			pthread_create(&philosopher[n], NULL, message, NULL);
+			pthread_create(&philosopher[n], NULL, message, (void *)philo);
 			pthread_join(philosopher[n], NULL);
 			n--;
 		}
 	}
-	sleep(1);
-	printf("the end\n");
+	usleep(1000);
+}
+int main(int argc, char **argv)
+{
+	t_philo philo;
+
+	init_philo(argc, argv, &philo);
 	exit (0);
 }

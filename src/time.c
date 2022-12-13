@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eclark <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 17:11:52 by eclark            #+#    #+#             */
-/*   Updated: 2022/12/13 13:45:25 by eclark           ###   ########.fr       */
+/*   Created: 2022/12/13 14:01:12 by eclark            #+#    #+#             */
+/*   Updated: 2022/12/13 14:13:43 by eclark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
-# include <pthread.h>
-# include <stdio.h>
-# include <string.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/time.h>
+#include "philo.h"
 
-typedef	struct	s_philo
+void	gettime(t_philo *philo)
 {
-	long int	time;
-}				t_philo;
+	struct timeval	current;
 
-/*utils*/
-int	ft_atoi(const char *str);
-
-#endif
+	gettime
