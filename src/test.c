@@ -6,7 +6,7 @@
 /*   By: eclark <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 17:10:44 by eclark            #+#    #+#             */
-/*   Updated: 2022/12/18 17:01:25 by eclark           ###   ########.fr       */
+/*   Updated: 2022/12/18 18:35:34 by eclark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 int	init_stuff(int argc, char **argv, t_stuff *stuff)
 {
-	if (argc < 5)
+	if (argc < 5 || argc > 6)
+		printf("\e[35m\e[1mPlease enter 4 or 5 arguements :)\e[0m\n");
 		return (1);
-	if (argc > 4)
+	if (argc > 4 && argc < 7)
 	{
 		stuff->num_phi = ft_atoi(argv[2]);
 		stuff->time_die = ft_atoi(argv[3]);
@@ -28,8 +29,6 @@ int	init_stuff(int argc, char **argv, t_stuff *stuff)
 			stuff->num_eat = ft_atoi(argv[6]);
 		else if (argc == 5)
 			stuff->num_eat = -1;
-		if (argc > 6)
-			return (1);
 	}
 	return (0);
 }
@@ -79,10 +78,14 @@ int main(int argc, char **argv)
 	while (argv[++n])
 	{	
 		if (check_num(argv[n]) != 0)
+		{
+			printf("\e[31m\e[1mPlease enter only numerical arguements :)\e[0m\n");
 			return (0);
+		}
 	}
 	init_stuff(argc, argv, &stuff);
 	init_philo(&stuff);
 	init_mutex(&stuff);
 	exit (0);
 }
+
