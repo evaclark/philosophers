@@ -6,7 +6,7 @@
 /*   By: eclark <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:00:20 by eclark            #+#    #+#             */
-/*   Updated: 2022/10/28 15:15:57 by eclark           ###   ########.fr       */
+/*   Updated: 2022/12/18 13:01:38 by eclark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,3 +38,19 @@ int	ft_atoi(const char *str)
 	}
 	return (sum * sign);
 }
+
+int	check_num(char *argv)
+{
+	int	i;
+
+	i = -1;
+	while (argv[++i])
+	{
+		if (argv[i] == '-')
+			i++;
+		if (!(argv [i] >= '0' && argv[i] <= '9'))
+			return (-1);
+	}
+	return (0);
+}
+

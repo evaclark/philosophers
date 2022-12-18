@@ -6,46 +6,77 @@
 /*   By: eclark <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 17:10:44 by eclark            #+#    #+#             */
-/*   Updated: 2022/12/13 14:21:14 by eclark           ###   ########.fr       */
+/*   Updated: 2022/12/18 16:09:24 by eclark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*message(void *philo)
+int	init_stuff(int argc, char **argv, t_stuff *stuff)
 {
-	struct timeval	current;
-
-	usleep(1000);
-	gettimeofday(&current, NULL);
-	printf("Philo %ld\n", (struct philo*)philo->time));
+	if (argc < 5)
+		return (1);
+	if (argc > 4)
+	{
+		stuff->num_phi = ft_atoi(argv[2]);
+		stuff->time_die = ft_atoi(argv[3]);
+		stuff->time_eat = ft_atoi(argv[4]);
+		stuff->time_sleep = ft_atoi(argv[5]);
+		stuff->all_eaten = 0;
+		stuff->dead_phi = 0;
+		if (argc == 6)
+			stuff->num_eat = ft_atoi(argv[6]);
+		else if (argc == 5)
+			stuff->num_eat = -1;
+		if (argc > 6)
+			return (1);
+	}
 	return (0);
 }
 
-void	init_philo(int argc, char **argv, t_philo *philo)
+int	init_philo(t_stuff *stuff)
 {
-	struct timeval	start;
+	int n;
+
+	n = 0;
+	while (n < stuff->num_phi)
+	{
+		stuff->philo[n].phi_id = n;
+		stuff->philo[n].fork_l = n;
+		stuff->philo[n].fork_r = (n + 1) % stuff->num_phi;
+		stuff->philo[n].ate = 0;
+		stuff->philo[n].last_ate = 0;
+		stuff->philo[n].stuff = stuff;
+		n++;
+	}
+	return (0);
+}
+
+int	init_mutex(t_stuff *stuff)
+{
 	int	n;
 
-	n = ft_atoi(argv[1]);
-	philo->time = gettimeofday(&start, NULL);
-	if (argc == 2)
+	n = 0;
+	while (n < stuff->num_phi)
 	{
-		while (n > 0)
-		{
-			pthread_t philosopher[n];
-
-			pthread_create(&philosopher[n], NULL, message, (void *)philo);
-			pthread_join(philosopher[n], NULL);
-			n--;
-		}
+		if (pthread_mutex_init((&stuff->forks[n]), NULL))
+			return (1);
+		n++;
 	}
-	usleep(1000);
+	if (pthread_mutex_init((&stuff->msg), NULL))
+		return (1);
+	if (pthread_mutex_init((&stuff->meal_check), NULL))
+		return (1);
+	return (0);
 }
+
 int main(int argc, char **argv)
 {
-	t_philo philo;
-
-	init_philo(argc, argv, &philo);
+	t_philo stuff;
+	
+	if (!check_num(argv))
+		return (0);
+	init_stuff(argc, argv, &stuff);
+	init_philo(&stuff);
 	exit (0);
 }
