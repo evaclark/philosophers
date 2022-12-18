@@ -6,7 +6,7 @@
 /*   By: eclark <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 17:10:44 by eclark            #+#    #+#             */
-/*   Updated: 2022/12/18 16:09:24 by eclark           ###   ########.fr       */
+/*   Updated: 2022/12/18 17:01:25 by eclark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,17 @@ int	init_mutex(t_stuff *stuff)
 
 int main(int argc, char **argv)
 {
-	t_philo stuff;
+	t_stuff stuff;
+	int	n;
 	
-	if (!check_num(argv))
-		return (0);
+	n = 0;
+	while (argv[++n])
+	{	
+		if (check_num(argv[n]) != 0)
+			return (0);
+	}
 	init_stuff(argc, argv, &stuff);
 	init_philo(&stuff);
+	init_mutex(&stuff);
 	exit (0);
 }
