@@ -6,7 +6,7 @@
 /*   By: eclark <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 17:10:44 by eclark            #+#    #+#             */
-/*   Updated: 2022/12/18 18:35:34 by eclark           ###   ########.fr       */
+/*   Updated: 2022/12/22 20:24:22 by eclark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 int	init_stuff(int argc, char **argv, t_stuff *stuff)
 {
 	if (argc < 5 || argc > 6)
+	{
 		printf("\e[35m\e[1mPlease enter 4 or 5 arguements :)\e[0m\n");
 		return (1);
+	}
 	if (argc > 4 && argc < 7)
 	{
 		stuff->num_phi = ft_atoi(argv[2]);
@@ -35,10 +37,10 @@ int	init_stuff(int argc, char **argv, t_stuff *stuff)
 
 int	init_philo(t_stuff *stuff)
 {
-	int n;
+	int	n;
 
 	n = 0;
-	while (n < stuff->num_phi)
+	while (n < (stuff->num_phi - 1))
 	{
 		stuff->philo[n].phi_id = n;
 		stuff->philo[n].fork_l = n;
@@ -56,7 +58,7 @@ int	init_mutex(t_stuff *stuff)
 	int	n;
 
 	n = 0;
-	while (n < stuff->num_phi)
+	while (n < (stuff->num_phi - 1))
 	{
 		if (pthread_mutex_init((&stuff->forks[n]), NULL))
 			return (1);
@@ -69,11 +71,11 @@ int	init_mutex(t_stuff *stuff)
 	return (0);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_stuff stuff;
-	int	n;
-	
+	t_stuff	stuff;
+	int		n;
+
 	n = 0;
 	while (argv[++n])
 	{	
@@ -88,4 +90,3 @@ int main(int argc, char **argv)
 	init_mutex(&stuff);
 	exit (0);
 }
-
