@@ -6,29 +6,11 @@
 /*   By: eclark <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 19:56:03 by eclark            #+#    #+#             */
-/*   Updated: 2023/01/03 17:17:49 by eclark           ###   ########.fr       */
+/*   Updated: 2023/01/04 19:59:48 by eclark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int	philo(t_stuff *stuff)
-{
-	int		n;
-	t_philo	*philo;
-
-	philo = stuff->philo;
-	stuff->time = gettime();
-	while (n < stuff->num_phi)
-	{
-			pthread_create(&philo[n], NULL, action, &(philo[n]));
-			philo[n].last_ate = gettime();
-			n++;
-	}
-	/*check for deaths*/
-	/*function for clean exit*/
-	return (0);
-}
 
 void	eat(t_philo *philo)
 {
@@ -36,11 +18,11 @@ void	eat(t_philo *philo)
 
 	stuff = philo->stuff;
 	pthread_mutex_lock(&(stuff->forks[philo->fork_l]));
-	/*print philo has taken l fork*/
+	printf("%ld philo %d has taken a fork\n", stuff->time, philo->phi_id);
 	pthread_mutex_lock(&(stuff->forks[philo->fork_r]));
-	/*print philo has taken r fork*/
+	printf("%ld philo %d has taken a fork\n", stuff->time, philo->phi_id);
 	pthread_mutex_lock(&(stuff->meal_check));
-	/*philo is eating*/
+	printf("%ld philo %d is eating\n", stuff->time, philo->phi_id);
 	philo->last_ate = gettime();
 	pthread_mutex_unlock(&(stuff->meal_check));
 	/*sleep*/
@@ -65,7 +47,7 @@ void	action(void *philosopher)
 		if (stuff->all_eaten == 1)
 			break ;
 		/*sleep*/
-		/*think*/
+		printf("%ld philo %d is thinking\n", stuff->time, philo->phi_id);
 		n++;
 	}
 	return (NULL);
@@ -78,4 +60,22 @@ void	amidead(t_stuff *stuff, t_philo *philo)
 	{
 		pthread_mutex_lock(&(stuff->meal_check));
 	}
+}
+
+int	philo(t_stuff *stuff)
+{
+	int		n;
+	t_philo	*philo;
+
+	philo = stuff->philo;
+	stuff->time = gettime();
+	while (n < stuff->num_phi)
+	{
+			pthread_create(&philo[n], NULL, action, &(philo[n]));
+			philo[n].last_ate = gettime();
+			n++;
+	}
+	amidead(stuff, philo);
+	/*function for clean exit*/
+	return (0);
 }

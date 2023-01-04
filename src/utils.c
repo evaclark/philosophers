@@ -6,7 +6,7 @@
 /*   By: eclark <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:00:20 by eclark            #+#    #+#             */
-/*   Updated: 2022/12/18 13:01:38 by eclark           ###   ########.fr       */
+/*   Updated: 2023/01/04 19:41:31 by eclark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,3 +54,7 @@ int	check_num(char *argv)
 	return (0);
 }
 
+void	byebye(t_stuff *stuff, t_philo *philo)
+{
+
+}
