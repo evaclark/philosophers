@@ -6,7 +6,7 @@
 /*   By: eclark <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:01:12 by eclark            #+#    #+#             */
-/*   Updated: 2022/12/22 20:03:38 by eclark           ###   ########.fr       */
+/*   Updated: 2023/01/03 16:09:56 by eclark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,5 @@ long long	gettime()
 	struct timeval	current;
 
 	gettimeofday(&current, NULL);
-	return((t.tv_sec * 1000) + (t.tv_usec / 1000));
+	return((current.tv_sec * 1000) + (current.tv_usec / 1000));
 }
