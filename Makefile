@@ -1,7 +1,7 @@
 NAME = Philosophers
 FLAGS = -Wall -Wextra -Werror
 
-SRC = test.c utils.c
+SRC = test.c utils.c philo.c time.c
 SRC_DIR = src/
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
 

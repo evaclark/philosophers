@@ -6,7 +6,7 @@
 /*   By: eclark <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 17:11:52 by eclark            #+#    #+#             */
-/*   Updated: 2022/12/23 19:38:39 by eclark           ###   ########.fr       */
+/*   Updated: 2023/01/05 19:46:56 by eclark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,10 @@ int	check_num(char *argv);
 
 /*time*/
 long long	gettime();
+long long	time_diff(long long past, long long pres);
+void	sleepytime(long long time, t_stuff *stuff);
+
+/*philo*/
+int	philo(t_stuff *stuff);
 
 #endif

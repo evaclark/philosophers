@@ -6,7 +6,7 @@
 /*   By: eclark <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 17:10:44 by eclark            #+#    #+#             */
-/*   Updated: 2022/12/22 20:24:22 by eclark           ###   ########.fr       */
+/*   Updated: 2023/01/05 20:11:36 by eclark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,6 @@ int	main(int argc, char **argv)
 	init_stuff(argc, argv, &stuff);
 	init_philo(&stuff);
 	init_mutex(&stuff);
+	philo(&stuff);
 	exit (0);
 }
