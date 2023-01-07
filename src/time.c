@@ -6,7 +6,7 @@
 /*   By: eclark <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:01:12 by eclark            #+#    #+#             */
-/*   Updated: 2023/01/05 19:44:43 by eclark           ###   ########.fr       */
+/*   Updated: 2023/01/07 17:28:04 by eclark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ void	sleepytime(long long time, t_stuff *stuff)
 	{
 		if (time_diff(n, gettime()) >= time)
 			break ;
-		usleep(50);
+		usleep(100);
 	}
 }

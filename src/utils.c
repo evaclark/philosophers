@@ -6,7 +6,7 @@
 /*   By: eclark <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:00:20 by eclark            #+#    #+#             */
-/*   Updated: 2023/01/05 20:11:13 by eclark           ###   ########.fr       */
+/*   Updated: 2023/01/07 17:28:05 by eclark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,25 @@
 
 int	ft_atoi(const char *str)
 {
-	int	sum;
-	int	sign;
+	long int	n;
+	int			sign;
 
-	sum = 0;
+	n = 0;
 	sign = 1;
-	while ((*str >= 9 && *str <= 13) || *str == 32)
-	{
+	while ((*str <= 13 && *str >= 9) || *str == 32)
 		str++;
-	}
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-		{
-			sign = sign * -1;
-		}
+	if (*str == '-')
+		return (-1);
+	else if (*str == '+')
 		str++;
-	}
-	while (*str >= '0' && *str <= '9')
+	while (*str)
 	{
-		sum = sum * 10 + *str - '0';
-		str++;
+		if (*str >= '0' && *str <= '9')
+			n = n * 10 + (*str++ - '0');
+		else
+			return (-1);
 	}
-	return (sum * sign);
+	return ((int)(n * sign));
 }
 
 int	check_num(char *argv)
