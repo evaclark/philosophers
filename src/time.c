@@ -6,18 +6,18 @@
 /*   By: eclark <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:01:12 by eclark            #+#    #+#             */
-/*   Updated: 2023/01/07 17:28:04 by eclark           ###   ########.fr       */
+/*   Updated: 2023/01/07 20:37:12 by eclark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-long long	gettime()
+long long	gettime(void)
 {
 	struct timeval	current;
 
 	gettimeofday(&current, NULL);
-	return((current.tv_sec * 1000) + (current.tv_usec / 1000));
+	return ((current.tv_sec * 1000) + (current.tv_usec / 1000));
 }
 
 long long	time_diff(long long past, long long pres)

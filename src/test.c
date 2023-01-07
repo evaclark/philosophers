@@ -6,7 +6,7 @@
 /*   By: eclark <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 17:10:44 by eclark            #+#    #+#             */
-/*   Updated: 2023/01/07 17:28:00 by eclark           ###   ########.fr       */
+/*   Updated: 2023/01/07 21:55:14 by eclark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,10 @@ int	main(int argc, char **argv)
 	int		n;
 
 	n = 0;
+	if (!(argc > 1))
+		return (0);
+	if (ft_atoi(argv[1]) < 2 || ft_atoi(argv[1]) > 250)
+		return (0);
 	while (argv[++n])
 	{	
 		if (check_num(argv[n]) != 0)
@@ -86,7 +90,7 @@ int	main(int argc, char **argv)
 	init_stuff(argc, argv, &stuff);
 	init_philo(&stuff);
 	init_mutex(&stuff);
-	if (stuff.num_phi < 2 || stuff.num_phi > 250 || stuff.time_die < 0 || stuff.time_eat < 0 || stuff.time_sleep < 0)
+	if (stuff.time_die < 0 || stuff.time_eat < 0 || stuff.time_sleep < 0)
 		return (0);
 	philo(&stuff);
 	return (0);
